@@ -1,0 +1,50 @@
+{
+  "name": "eth-send",
+  "version": "0.0.1",
+  "description": "Simple way to send ether.",
+  "main": "index.js",
+  "bin": {
+    "eth_send": "bin/eth_send"
+  },
+  "scripts": {
+    "test": "tape test/*.js",
+    "lint": "standard --fix index.js test/test.js example/example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miguelmota/eth-send"
+  },
+  "bugs": {
+    "url": "https://github.com/miguelmota/eth-send/issues"
+  },
+  "homepage": "https://github.com/miguelmota/eth-send",
+  "author": {
+    "name": "Miguel Mota",
+    "email": "hello@miguelmota.com",
+    "url": "https://miguelmota.com/"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/miguelmota/eth-send/blob/master/LICENSE"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "ethereum-private-key-to-address": "0.0.2",
+    "meow": "^5.0.0",
+    "truffle-privatekey-provider": "^1.3.0",
+    "web3": "^1.0.0-beta.55"
+  },
+  "keywords": [
+    "ethereum",
+    "eth",
+    "ether",
+    "send",
+    "transfer",
+    "cli"
+  ],
+  "devDependencies": {
+    "standard": "^12.0.1",
+    "tape": "^4.10.2",
+    "tape-await": "^0.1.2"
+  }
+}

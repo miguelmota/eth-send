@@ -75,6 +75,12 @@ $ eth_send \
 0x8ee7ed489c7cb206cd9b4ff65a5d2977324b4f727b12cd2e0c0bbcaa59219e00
 ```
 
+Show help:
+
+```bash
+$ eth_send --help
+```
+
 ## Test
 
 ```bash

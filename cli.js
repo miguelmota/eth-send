@@ -14,7 +14,7 @@ const cli = meow(`
       --network, -n Network name or network provider URI (default "mainnet")
       --gasPrice, -p Gas price in wei
       --gas, -g Gas limit
-      --data, -d Tx data
+      --data, -d Transaction data
       --silent, -s Silent output
 
     Examples
@@ -70,16 +70,21 @@ const value = cli.flags.v || cli.flags.value
 const data = cli.flags.d || cli.flags.data
 const gas = cli.flags.g || cli.flags.gas
 const gasPrice = cli.flags.p || cli.flags.gasPrice
-const network = cli.flags.n || cli.flags.network
+const network = (cli.flags.n || cli.flags.network || '').toLowerCase()
 const silent = cli.flags.s || cli.flags.silent
 
-if (!from) {
+if (from === undefined) {
   console.log('--from argument is required')
   process.exit(1)
 }
 
-if (!to) {
+if (to === undefined) {
   console.log('--to argument is required')
+  process.exit(1)
+}
+
+if (amount === undefined && value === undefined) {
+  console.log('--amount argument is required')
   process.exit(1)
 }
 
@@ -100,7 +105,9 @@ async function main() {
     if (silent) {
       console.log(txHash)
     } else {
-      console.log('\n'+chalk.green(`https://${network !== 'mainnet' ? `${network}.` : '' }etherscan.io/tx/${txHash}`))
+      if (['mainnet', 'ropsten', 'rinkeby', 'kovan', 'goerli'].includes(network)) {
+        console.log('\n'+chalk.green(`https://${network !== 'mainnet' ? `${network}.` : '' }etherscan.io/tx/${txHash}`))
+      }
     }
 
     process.exit(0)

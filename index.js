@@ -8,7 +8,7 @@ async function send (config) {
   const to = config.to
   let amount = config.amount || 0
   let value = config.value || 0
-  const network = config.network || 'mainnet'
+  const network = (config.network || 'mainnet').toLowerCase()
 
   let providerUri = `https://${network}.infura.io/`
   if (/^(http|ws)/.test(network)) {

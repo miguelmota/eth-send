@@ -10,6 +10,7 @@ const cli = meow(`
       --from, -f Private key of sender (required)
       --to, -t Address to send to (required)
       --amount, -a Ether amount to send (required)
+      --value , -v Wei amount to send (alternative to --amount)
       --network, -n Network name or network provider URI (default "mainnet")
       --gasPrice, -p Gas price in wei
       --gas, -g Gas limit
@@ -35,6 +36,10 @@ const cli = meow(`
       type: 'string',
       alias: 'a'
     },
+    value: {
+      type: 'string',
+      alias: 'v'
+    },
     network: {
       type: 'string',
       alias: 'n'
@@ -58,9 +63,10 @@ const cli = meow(`
   }
 })
 
-const from = cli.flags.f || cli.flags.from
+const from = cli.flags.f || cli.flags.from || process.env.FROM
 const to = cli.flags.t || cli.flags.to
 const amount = cli.flags.a || cli.flags.amount
+const value = cli.flags.v || cli.flags.value
 const data = cli.flags.d || cli.flags.data
 const gas = cli.flags.g || cli.flags.gas
 const gasPrice = cli.flags.p || cli.flags.gasPrice
@@ -83,6 +89,7 @@ async function main() {
       from,
       to,
       amount,
+      value,
       network,
       data,
       gas,
@@ -99,6 +106,7 @@ async function main() {
     process.exit(0)
   } catch(err) {
     console.error(chalk.red(err.message))
+    process.exit(1)
   }
 }
 

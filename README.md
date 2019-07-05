@@ -65,12 +65,7 @@ https://rinkeby.etherscan.io/tx/0x8ee7ed489c7cb206cd9b4ff65a5d2977324b4f727b12cd
 Use the silent flag to only return the transaction hash:
 
 ```bash
-$ eth_send \
-  --from 4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d \
-  --to 0xffcf8fdee72ac11b5c542428b35eef5769c409f0 \
-  --amount 0.01 \
-  --network rinkeby \
-  --silent
+$ eth_send [...] --silent
 
 0x8ee7ed489c7cb206cd9b4ff65a5d2977324b4f727b12cd2e0c0bbcaa59219e00
 ```
@@ -79,6 +74,12 @@ You may use a custom provider in the network flag:
 
 ```
 $ eth_send [...] --network https://rinkeby.infura.io/
+```
+
+The sender private key can be set as an environment variable:
+
+```bash
+FROM=4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d eth_end [....]
 ```
 
 Show help:

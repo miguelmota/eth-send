@@ -17,6 +17,7 @@ const send = require('eth-send')
     from: <private-key>
     to: <to-address>
     amount: <eth-amount>
+    value: <wei-amount>
     network: <network-name>
     data: <tx-data>
     gas: <gas-limit>

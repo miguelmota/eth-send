@@ -9,7 +9,13 @@ async function send(config) {
   const amount = config.amount || 0
   const network =  config.network || 'mainnet'
 
-  const providerUri = `https://${network}.infura.io/`
+  let providerUri = `https://${network}.infura.io/`
+  if (/^(http|ws)/.test(network)) {
+    providerUri = network
+  } else if (network === 'local' || network === 'development') {
+    providerUri = 'http://localhost:8545'
+  }
+
   const provider = new PrivateKeyProvider(privateKey, providerUri)
   const web3 = new Web3(provider)
 

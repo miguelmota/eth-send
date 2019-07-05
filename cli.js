@@ -10,7 +10,7 @@ const cli = meow(`
       --from, -f Private key of sender (required)
       --to, -t Address to send to (required)
       --amount, -a Ether amount to send (required)
-      --network, -n Network name (default "mainnet")
+      --network, -n Network name or network provider URI (default "mainnet")
       --gasPrice, -p Gas price in wei
       --gas, -g Gas limit
       --data, -d Tx data

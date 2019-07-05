@@ -1,6 +1,6 @@
 {
   "name": "eth-send",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple way to send ether.",
   "main": "index.js",
   "bin": {

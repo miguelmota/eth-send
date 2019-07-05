@@ -79,7 +79,7 @@ $ eth_send [...] --network https://rinkeby.infura.io/
 The sender private key can be set as an environment variable:
 
 ```bash
-FROM=4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d eth_end [....]
+FROM=4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d eth_send [....]
 ```
 
 Show help:

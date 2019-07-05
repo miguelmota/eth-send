@@ -15,13 +15,18 @@ async function send(config) {
 
   const weiValue = web3.utils.toWei(amount, 'ether')
   const fromAddress = privateKeyToAddress(privateKey)
+  const data = config.data || '0x'
+  const gas = config.gas || 21000
+  const gasPrice = config.gasPrice || await web3.eth.getGasPrice()
 
   if (config.log) {
     console.log(chalk.yellow('sending transaction:'))
-    console.log('\nnetwork: %s', network)
-    console.log('from:    %s', fromAddress)
-    console.log('to:      %s', toAddress)
-    console.log('amount:  %s ETH (%s wei)', amount, weiValue)
+    console.log('\nnetwork:  %s', network)
+    console.log('from:     %s', fromAddress)
+    console.log('to:       %s', toAddress)
+    console.log('amount:   %s ETH (%s wei)', amount, weiValue)
+    console.log('gas:      %s', gas)
+    console.log('gasPrice: %s gwei', web3.utils.fromWei(gasPrice, 'gwei'))
   }
 
   const txHash = await new Promise((resolve, reject) => {
@@ -29,8 +34,9 @@ async function send(config) {
       from: fromAddress,
       to: toAddress,
       value: weiValue,
-      data: '0x00',
-      gasLimit: 25000
+      data,
+      gas,
+      gasPrice
     }, (err, txHash) => {
       if (err) return reject(err)
       resolve(txHash)
@@ -38,7 +44,7 @@ async function send(config) {
   })
 
   if (config.log) {
-    console.log('\ntx hash: %s', txHash)
+    console.log('\ntx hash:  %s', txHash)
   }
 
   return txHash

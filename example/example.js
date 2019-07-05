@@ -11,3 +11,15 @@ const send = require('eth-send')
   console.log(txHash) // 0x8ee7ed489c7cb206cd9b4ff65a5d2977324b4f727b12cd2e0c0bbcaa59219e00
 })()
 
+/*
+  options:
+
+    from: <private-key>
+    to: <to-address>
+    amount: <eth-amount>
+    network: <network-name>
+    data: <tx-data>
+    gas: <gas-limit>
+    gasPrice: <gas-price-wei>
+    log: <enable-logs>
+*/

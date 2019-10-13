@@ -64,30 +64,50 @@ const cli = meow(`
 
 const from = cli.flags.f || cli.flags.from || process.env.FROM
 const to = cli.flags.t || cli.flags.to
-const amount = cli.flags.a || cli.flags.amount
-const value = cli.flags.v || cli.flags.value
+let value = cli.flags.v || cli.flags.value
+let amount = cli.flags.a || cli.flags.amount
 const data = cli.flags.d || cli.flags.data
 const gas = cli.flags.g || cli.flags.gas
 const gasPrice = cli.flags.p || cli.flags.gasPrice
 const network = (cli.flags.n || cli.flags.network || '').toLowerCase()
 const silent = cli.flags.s || cli.flags.silent
 
-if (from === undefined) {
-  console.log('--from argument is required')
-  process.exit(1)
+if (process.stdin) {
+  process.stdin.setEncoding('utf8')
+  process.stdin.resume()
+  let content = ''
+  process.stdin.on('data', (buf) => {
+    content += buf.toString()
+  })
+  setTimeout(() => {
+    content = content.trim()
+
+    if (content) {
+      amount = content
+    }
+
+    run()
+  }, 10)
+} else {
+  run()
 }
 
-if (to === undefined) {
-  console.log('--to argument is required')
-  process.exit(1)
-}
+async function run() {
+  if (from === undefined) {
+    console.log('--from argument is required')
+    process.exit(1)
+  }
 
-if (amount === undefined && value === undefined) {
-  console.log('--amount argument is required')
-  process.exit(1)
-}
+  if (to === undefined) {
+    console.log('--to argument is required')
+    process.exit(1)
+  }
 
-async function main() {
+  if (amount === undefined && value === undefined) {
+    console.log('--amount argument is required')
+    process.exit(1)
+  }
+
   try {
     const txHash = await send({
       from,
@@ -115,5 +135,3 @@ async function main() {
     process.exit(1)
   }
 }
-
-main()

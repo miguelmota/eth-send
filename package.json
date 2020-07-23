@@ -1,10 +1,11 @@
 {
   "name": "eth-send",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Simple way to send ether.",
   "main": "index.js",
   "bin": {
-    "eth_send": "bin/eth_send"
+    "eth_send": "bin/eth_send",
+    "eth-send": "bin/eth_send"
   },
   "scripts": {
     "test": "tape test/*.js",
